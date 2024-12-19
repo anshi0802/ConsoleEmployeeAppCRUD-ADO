@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleEmployeeAppCRUD", "ConsoleEmployeeAppCRUD.csproj", "{6AE4E3A2-8EB4-4145-8971-DAAAAC9AE45E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlServerConnectionLibrary", "E:\restapi-machine-test-realtime-project\SqlServerConnectionLibrary\SqlServerConnectionLibrary.csproj", "{476BCB31-D078-43E4-AA25-1EAD0427881E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6AE4E3A2-8EB4-4145-8971-DAAAAC9AE45E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AE4E3A2-8EB4-4145-8971-DAAAAC9AE45E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AE4E3A2-8EB4-4145-8971-DAAAAC9AE45E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AE4E3A2-8EB4-4145-8971-DAAAAC9AE45E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{476BCB31-D078-43E4-AA25-1EAD0427881E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{476BCB31-D078-43E4-AA25-1EAD0427881E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{476BCB31-D078-43E4-AA25-1EAD0427881E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{476BCB31-D078-43E4-AA25-1EAD0427881E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
