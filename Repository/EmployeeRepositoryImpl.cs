@@ -1,4 +1,5 @@
 ﻿using ConsoleEmployeeAppCRUD.Model;
+using SqlServerConnectionLibrary;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,9 +14,8 @@ namespace ConsoleEmployeeAppCRUD.Repository
 
         public async Task AddEmployeeAsync(Employee employee)
         {
-            using (SqlConnection conn = new SqlConnection(winConnString))
+            using (SqlConnection conn = SqlServerConnectionManager.OpenConnection(winConnString))
             {
-                await conn.OpenAsync();
                 string query = "INSERT INTO Employee (EmployeeCode, EmployeeName, DeptId, LocationCode, Salary) " +
                                "VALUES(@EmpCode, @EmpName, @DeptId, @LocCode, @Sal)";
 
@@ -23,7 +23,7 @@ namespace ConsoleEmployeeAppCRUD.Repository
                 {
                     command.Parameters.AddWithValue("@EmpCode", employee.EmployeeCode);
                     command.Parameters.AddWithValue("@EmpName", employee.EmployeeName);
-                    command.Parameters.AddWithValue("@DeptId", employee.DeptId); // Use DeptId
+                    command.Parameters.AddWithValue("@DeptId", employee.DeptId);
                     command.Parameters.AddWithValue("@LocCode", employee.LocationCode);
                     command.Parameters.AddWithValue("@Sal", employee.Salary);
 
@@ -34,9 +34,8 @@ namespace ConsoleEmployeeAppCRUD.Repository
 
         public async Task UpdateEmployeeAsync(string employeeCode, Employee updatedEmployee)
         {
-            using (SqlConnection conn = new SqlConnection(winConnString))
+            using (SqlConnection conn = SqlServerConnectionManager.OpenConnection(winConnString))
             {
-                await conn.OpenAsync();
                 string query = "UPDATE Employee SET EmployeeName = @EmpName, DeptId = @DeptId, " +
                                "LocationCode = @LocCode, Salary = @Sal WHERE EmployeeCode = @EmpCode";
 
@@ -44,7 +43,7 @@ namespace ConsoleEmployeeAppCRUD.Repository
                 {
                     command.Parameters.AddWithValue("@EmpCode", employeeCode);
                     command.Parameters.AddWithValue("@EmpName", updatedEmployee.EmployeeName);
-                    command.Parameters.AddWithValue("@DeptId", updatedEmployee.DeptId); // Use DeptId
+                    command.Parameters.AddWithValue("@DeptId", updatedEmployee.DeptId);
                     command.Parameters.AddWithValue("@LocCode", updatedEmployee.LocationCode);
                     command.Parameters.AddWithValue("@Sal", updatedEmployee.Salary);
 
@@ -55,9 +54,8 @@ namespace ConsoleEmployeeAppCRUD.Repository
 
         public async Task<Employee> GetEmployeeByCodeAsync(string employeeCode)
         {
-            using (SqlConnection conn = new SqlConnection(winConnString))
+            using (SqlConnection conn = SqlServerConnectionManager.OpenConnection(winConnString))
             {
-                await conn.OpenAsync();
                 string query = @"
                 SELECT e.EmployeeCode, e.EmployeeName, e.DeptId, e.LocationCode, e.Salary,
                        d.DeptId, d.DeptCode, d.DepartmentName
@@ -84,7 +82,7 @@ namespace ConsoleEmployeeAppCRUD.Repository
                             {
                                 EmployeeCode = reader["EmployeeCode"].ToString(),
                                 EmployeeName = reader["EmployeeName"].ToString(),
-                                DeptId = Convert.ToInt32(reader["DeptId"]), // Use DeptId
+                                DeptId = Convert.ToInt32(reader["DeptId"]),
                                 LocationCode = reader["LocationCode"].ToString(),
                                 Salary = Convert.ToInt32(reader["Salary"]),
                                 Department = department
@@ -100,9 +98,8 @@ namespace ConsoleEmployeeAppCRUD.Repository
         {
             var employees = new List<Employee>();
 
-            using (SqlConnection conn = new SqlConnection(winConnString))
+            using (SqlConnection conn = SqlServerConnectionManager.OpenConnection(winConnString))
             {
-                await conn.OpenAsync();
                 string query = @"
                 SELECT e.EmployeeCode, e.EmployeeName, e.DeptId, e.LocationCode, e.Salary,
                        d.DeptId, d.DeptCode, d.DepartmentName
@@ -126,7 +123,7 @@ namespace ConsoleEmployeeAppCRUD.Repository
                             {
                                 EmployeeCode = reader["EmployeeCode"].ToString(),
                                 EmployeeName = reader["EmployeeName"].ToString(),
-                                DeptId = Convert.ToInt32(reader["DeptId"]), // Use DeptId
+                                DeptId = Convert.ToInt32(reader["DeptId"]),
                                 LocationCode = reader["LocationCode"].ToString(),
                                 Salary = Convert.ToInt32(reader["Salary"]),
                                 Department = department
@@ -142,9 +139,8 @@ namespace ConsoleEmployeeAppCRUD.Repository
 
         public async Task DeleteEmployeeAsync(string employeeCode)
         {
-            using (SqlConnection conn = new SqlConnection(winConnString))
+            using (SqlConnection conn = SqlServerConnectionManager.OpenConnection(winConnString))
             {
-                await conn.OpenAsync();
                 string query = "DELETE FROM Employee WHERE EmployeeCode = @EmpCode";
 
                 using (SqlCommand command = new SqlCommand(query, conn))
